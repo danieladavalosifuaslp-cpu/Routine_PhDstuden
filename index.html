@@ -3,199 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhD Routine v2.0</title>
+    <title>PhD Routine v3.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
-        /* Efecto Cristal y UI */
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); }
         .active-tab { color: #3b82f6; border-bottom: 2px solid #3b82f6; }
         .inactive-tab { color: #64748b; }
-        /* Inputs mejorados */
-        select, input { background: #1e293b; color: white; border: 1px solid #334155; padding: 10px; border-radius: 8px; width: 100%; outline: none; font-size: 0.9rem; }
-        select:focus, input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px #3b82f6; }
+        select, input { background: #1e293b; color: white; border: 1px solid #334155; padding: 8px; border-radius: 8px; width: 100%; outline: none; }
         /* Animaciones */
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Slider personalizado */
+        input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #3b82f6; margin-top: -6px; }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #334155; border-radius: 2px; }
     </style>
 </head>
-<body class="pb-24 bg-[#0f172a]">
+<body class="pb-32 bg-[#0f172a]">
 
-    <header class="sticky top-0 z-50 bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800 px-4 py-4 shadow-lg shadow-black/20">
+    <header class="sticky top-0 z-50 bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800 px-4 py-4">
         <div class="max-w-md mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-xl font-black italic tracking-tighter text-white">DAYLY <span class="text-blue-500">ROUTINE</span></h1>
-                <p class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">PhD System v2.0</p>
-            </div>
+            <h1 class="text-xl font-black italic tracking-tighter text-white">DAYLY <span class="text-blue-500">ROUTINE</span></h1>
             <div class="bg-blue-900/20 px-3 py-1 rounded-full border border-blue-500/20">
-                <span class="text-[10px] text-blue-400 font-bold uppercase">SOP Mode: ON</span>
+                <span class="text-[10px] text-blue-400 font-bold uppercase">v3.0 Nutri-Tech</span>
             </div>
         </div>
-
         <nav class="max-w-md mx-auto mt-4 flex justify-between text-xs font-bold uppercase tracking-widest border-b border-slate-800">
-            <button onclick="setTab('focus')" id="btn-focus" class="active-tab pb-3 w-1/4 transition-all">🧠 Focus</button>
-            <button onclick="setTab('gym')" id="btn-gym" class="inactive-tab pb-3 w-1/4 transition-all">🏋️ Gym</button>
-            <button onclick="setTab('fuel')" id="btn-fuel" class="inactive-tab pb-3 w-1/4 transition-all">🥗 Fuel</button>
-            <button onclick="setTab('setup')" id="btn-setup" class="inactive-tab pb-3 w-1/4 transition-all">⚙️ Setup</button>
+            <button onclick="setTab('focus')" id="btn-focus" class="active-tab pb-3 w-1/4">🧠 Focus</button>
+            <button onclick="setTab('gym')" id="btn-gym" class="inactive-tab pb-3 w-1/4">🏋️ Gym</button>
+            <button onclick="setTab('fuel')" id="btn-fuel" class="inactive-tab pb-3 w-1/4">🥗 Fuel</button>
+            <button onclick="setTab('setup')" id="btn-setup" class="inactive-tab pb-3 w-1/4">⚙️ Setup</button>
         </nav>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
 
         <section id="tab-focus" class="fade-in">
-            <div class="glass p-5 rounded-2xl border-l-4 border-amber-400 mb-6 flex items-center gap-4 shadow-lg shadow-amber-900/10">
-                <div class="bg-amber-400/10 p-2 rounded-xl text-2xl">⚡</div>
+            <div class="glass p-5 rounded-2xl border-l-4 border-amber-400 mb-6 flex items-center gap-4">
+                <div class="text-2xl">⚡</div>
                 <div>
-                    <h3 class="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Hora Dorada (Deep Work)</h3>
+                    <h3 class="text-amber-400 font-bold text-[10px] uppercase tracking-widest">Hora Dorada</h3>
                     <p class="text-white font-black text-xl italic">07:00 — 11:00 AM</p>
-                    <p class="text-[10px] text-slate-400 mt-1">Bloqueo de interrupciones activo.</p>
                 </div>
             </div>
-
-            <div id="tasks-container" class="space-y-4">
-                </div>
+            <div id="tasks-container" class="space-y-4"></div>
         </section>
-
 
         <section id="tab-gym" class="hidden fade-in">
-            <div class="glass p-4 rounded-xl mb-4 flex justify-between items-center bg-slate-800/50">
-                <div class="w-full mr-4">
-                    <label class="text-[9px] text-blue-400 uppercase font-bold tracking-wider mb-1 block">Día de Entrenamiento</label>
-                    <select id="day-select" onchange="renderGym()" class="text-sm font-bold bg-transparent border-none p-0 focus:ring-0">
-                        <option value="Lunes">Lunes: Glute Focus (Heavy)</option>
-                        <option value="Martes">Martes: Upper Body</option>
-                        <option value="Miercoles">Miércoles: Glute & Hams</option>
-                        <option value="Jueves">Jueves: Shoulders & Core</option>
-                        <option value="Viernes">Viernes: Legs (Quads)</option>
-                    </select>
-                </div>
-                <button onclick="toggleEdit()" id="edit-btn" class="text-[10px] font-bold text-slate-400 uppercase border border-slate-600 px-3 py-2 rounded-lg hover:text-white hover:border-white transition-all whitespace-nowrap">
-                    ✎ Editar
-                </button>
+            <div class="glass p-4 rounded-xl mb-4 flex justify-between items-center">
+                <select id="day-select" onchange="renderGym()" class="text-sm font-bold bg-transparent border-none p-0 w-2/3">
+                    <option value="Lunes">Lunes: Glute Focus</option>
+                    <option value="Martes">Martes: Upper Body</option>
+                    <option value="Miercoles">Miércoles: Glute & Hams</option>
+                    <option value="Jueves">Jueves: Shoulders & Core</option>
+                    <option value="Viernes">Viernes: Legs (Quads)</option>
+                </select>
+                <button onclick="toggleEdit()" id="edit-btn" class="text-[10px] font-bold text-slate-400 border border-slate-600 px-3 py-1 rounded">✎ Editar</button>
             </div>
-
-            <div id="gym-list" class="space-y-3 pb-8">
-                </div>
+            <div id="gym-list" class="space-y-3 pb-8"></div>
         </section>
 
-
-        <section id="tab-fuel" class="hidden fade-in">
+        <section id="tab-fuel" class="hidden fade-in space-y-6">
             
-            <div class="grid grid-cols-3 gap-3 mb-6">
-                <div class="glass p-3 rounded-2xl text-center border-t-2 border-t-blue-500">
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Prot</p>
-                    <p class="text-xl font-black text-white italic" id="view-prot">120g</p>
+            <div class="glass p-5 rounded-3xl border border-blue-500/20">
+                <div class="flex justify-between items-end mb-4">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Presupuesto Energético</h3>
+                    <p class="text-2xl font-black text-white italic"><span id="total-cals-display">1462</span> <span class="text-xs not-italic text-slate-500">kcal</span></p>
                 </div>
-                <div class="glass p-3 rounded-2xl text-center border-t-2 border-t-pink-500">
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Grasa</p>
-                    <p class="text-xl font-black text-white italic" id="view-fat">78g</p>
+                
+                <div class="mb-6">
+                    <input type="range" id="cals-slider" min="1200" max="2500" step="50" value="1462" oninput="updateFromCals()" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer">
+                    <div class="flex justify-between text-[9px] text-slate-500 mt-1 uppercase font-bold">
+                        <span>Definición</span>
+                        <span>Mantenimiento</span>
+                        <span>Volumen</span>
+                    </div>
                 </div>
-                <div class="glass p-3 rounded-2xl text-center border-t-2 border-t-amber-500">
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Carbs</p>
-                    <p class="text-xl font-black text-white italic" id="view-carbs">70g</p>
+
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="text-center bg-slate-800/50 p-2 rounded-xl border border-blue-900">
+                        <label class="text-[8px] text-blue-400 uppercase font-bold block mb-1">Proteína</label>
+                        <input type="number" id="input-prot" class="text-center font-bold text-sm bg-transparent border-none p-0 focus:ring-0" onchange="updateFromMacros('p')">
+                        <span class="text-[8px] text-slate-500">g</span>
+                    </div>
+                    <div class="text-center bg-slate-800/50 p-2 rounded-xl border border-pink-900">
+                        <label class="text-[8px] text-pink-400 uppercase font-bold block mb-1">Grasa</label>
+                        <input type="number" id="input-fat" class="text-center font-bold text-sm bg-transparent border-none p-0 focus:ring-0" onchange="updateFromMacros('f')">
+                        <span class="text-[8px] text-slate-500">g</span>
+                    </div>
+                    <div class="text-center bg-slate-800/50 p-2 rounded-xl border border-amber-900 opacity-80">
+                        <label class="text-[8px] text-amber-400 uppercase font-bold block mb-1">Carbs</label>
+                        <input type="number" id="input-carbs" class="text-center font-bold text-sm bg-transparent border-none p-0 focus:ring-0" disabled>
+                        <span class="text-[8px] text-slate-500">Auto</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="glass p-5 rounded-3xl border-l-4 border-pink-500 mb-4 relative overflow-hidden group">
-                <div class="absolute right-0 top-0 p-4 text-6xl opacity-5 group-hover:opacity-10 transition-opacity">🍓</div>
-                <div class="relative z-10">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-white text-sm uppercase tracking-wide">Desayuno (Hábito)</h3>
-                        <span class="text-[9px] bg-pink-500/20 text-pink-300 px-2 py-1 rounded-md font-bold uppercase">SOP Protocol</span>
+            <div class="glass p-5 rounded-3xl border-l-4 border-pink-500 relative overflow-hidden">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-white text-sm uppercase">1. Desayuno (Hábito)</h3>
+                    <span class="text-[9px] bg-pink-500/20 text-pink-300 px-2 py-1 rounded-md font-bold">25% Kcal</span>
+                </div>
+                
+                <div class="flex items-center gap-3 mb-3 bg-slate-800/50 p-2 rounded-lg">
+                    <div class="text-2xl">🍓</div>
+                    <div>
+                        <p class="text-xs font-bold text-white">Smoothie Base Kefir</p>
+                        <p class="text-[9px] text-slate-400">200ml Kefir + 150g Fresas</p>
                     </div>
-                    <ul class="text-xs text-slate-300 space-y-1 ml-1">
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-pink-500 rounded-full"></span> 200ml Kefir Natural</li>
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-pink-500 rounded-full"></span> 150g Fresas / Frutos Rojos</li>
-                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-pink-500 rounded-full"></span> Probióticos / Suplementos</li>
+                </div>
+
+                <div class="border-t border-slate-700 pt-3">
+                    <p class="text-[9px] text-slate-400 uppercase mb-2">Para completar este bloque agrega:</p>
+                    <ul class="text-xs text-slate-200 space-y-1 font-mono">
+                        <li>🍳 <span id="bf-prot">0</span>g Proteína (Ej: 2 Huevos)</li>
+                        <li>🥑 <span id="bf-fat">0</span>g Grasa (Ej: 1/4 Aguacate)</li>
+                        <li>🍞 <span id="bf-carbs">0</span>g Carbs (Ej: 1 Pan Ezequiel)</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="glass p-5 rounded-3xl border-l-4 border-blue-500 mb-4 relative overflow-hidden">
-                <div class="absolute right-0 top-0 p-4 text-6xl opacity-5">⚖️</div>
-                <h3 class="font-bold text-white text-sm uppercase tracking-wide mb-4">🍽️ Calculadora de Almuerzo</h3>
-                
-                <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="glass p-5 rounded-3xl border-l-4 border-blue-500">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-white text-sm uppercase">2. Almuerzo (Fuerte)</h3>
+                    <span class="text-[9px] bg-blue-500/20 text-blue-300 px-2 py-1 rounded-md font-bold">40% Kcal</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
-                        <label class="text-[9px] text-slate-400 uppercase font-bold mb-1 block">Fuente Proteína</label>
-                        <select id="protein-source" onchange="calcFood()" class="text-xs bg-slate-800/80">
-                            <option value="0.23">Pechuga de Pollo</option>
+                        <label class="text-[9px] text-slate-500 uppercase">Proteína</label>
+                        <select id="lunch-source" onchange="renderMealCalculations()" class="text-xs bg-slate-900">
+                            <option value="0.23">Pollo (Pechuga)</option>
                             <option value="0.20">Pescado Blanco</option>
-                            <option value="0.24">Atún en Agua</option>
-                            <option value="0.22">Res Magra (95/5)</option>
-                            <option value="0.20">Salmón</option>
+                            <option value="0.22">Res Magra</option>
+                            <option value="0.24">Atún</option>
                         </select>
                     </div>
                     <div>
-                        <label class="text-[9px] text-slate-400 uppercase font-bold mb-1 block">Carbohidrato</label>
-                        <select class="text-xs bg-slate-800/80">
-                            <option>Papa Cocida</option>
-                            <option>Arroz Integral</option>
-                            <option>Pasta Integral</option>
-                            <option>Quinoa</option>
+                        <label class="text-[9px] text-slate-500 uppercase">Carbohidrato</label>
+                        <select id="lunch-carb-source" onchange="renderMealCalculations()" class="text-xs bg-slate-900">
+                            <option value="0.20">Papa Cocida</option>
+                            <option value="0.28">Arroz (Cocido)</option>
+                            <option value="0.25">Pasta (Cocida)</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-r from-blue-600/20 to-blue-900/20 p-4 rounded-xl border border-blue-500/30 text-center">
-                    <p class="text-[9px] text-blue-300 uppercase tracking-widest mb-1">Peso en Crudo (Calculado)</p>
-                    <p class="text-4xl font-black text-white italic tracking-tighter"><span id="calc-result">0</span><span class="text-lg text-blue-400 not-italic">g</span></p>
-                    <p class="text-[9px] text-slate-500 mt-2">Ajustado automáticamente a tu meta diaria.</p>
+                <div class="flex justify-between text-center bg-slate-800 p-2 rounded-xl">
+                    <div>
+                        <p class="text-[8px] text-slate-500 uppercase">Pesar Carne (Crudo)</p>
+                        <p class="text-lg font-black text-white" id="lunch-grams-prot">0g</p>
+                    </div>
+                    <div>
+                        <p class="text-[8px] text-slate-500 uppercase">Pesar Carb (Cocido)</p>
+                        <p class="text-lg font-black text-white" id="lunch-grams-carb">0g</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="glass p-5 rounded-3xl border-l-4 border-emerald-500 mb-8">
-                <div class="flex justify-between items-start mb-2">
-                    <h3 class="font-bold text-white text-sm uppercase tracking-wide">Cena (Reparación)</h3>
-                    <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-md font-bold uppercase">Low Carb</span>
+            <div class="glass p-5 rounded-3xl border-l-4 border-emerald-500">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-white text-sm uppercase">3. Cena (Recuperación)</h3>
+                    <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-md font-bold">35% Kcal</span>
                 </div>
-                <p class="text-xs text-slate-300">2-3 Huevos + Aguacate + Vegetales Verdes</p>
+                <div class="text-xs text-slate-300 space-y-1 font-mono bg-slate-800/30 p-3 rounded-lg">
+                    <p>🥩 Proteína: <span id="dinner-prot" class="text-white font-bold">0</span>g</p>
+                    <p>🥑 Grasa: <span id="dinner-fat" class="text-white font-bold">0</span>g</p>
+                    <p>🥗 Carbs: <span id="dinner-carbs" class="text-white font-bold">0</span>g</p>
+                </div>
+                <p class="text-[9px] text-slate-500 mt-2 text-center">Sugerencia: Ensalada con proteína o Huevos.</p>
             </div>
+
         </section>
 
-
-        <section id="tab-setup" class="hidden fade-in">
-            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6 border-b border-slate-700 pb-2">Configuración del Laboratorio</h3>
-            
-            <div class="glass p-5 rounded-2xl space-y-4 mb-6">
-                <h4 class="text-xs font-bold text-white uppercase">Tus Metas (Macros)</h4>
-                <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="text-[9px] text-blue-400 uppercase font-bold mb-1 block">Prot (g)</label>
-                        <input type="number" id="input-prot" class="font-mono text-center font-bold" onchange="saveSettings()">
-                    </div>
-                    <div>
-                        <label class="text-[9px] text-pink-400 uppercase font-bold mb-1 block">Grasa (g)</label>
-                        <input type="number" id="input-fat" class="font-mono text-center font-bold" onchange="saveSettings()">
-                    </div>
-                    <div>
-                        <label class="text-[9px] text-amber-400 uppercase font-bold mb-1 block">Carbs (g)</label>
-                        <input type="number" id="input-carbs" class="font-mono text-center font-bold" onchange="saveSettings()">
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="resetFactory()" class="w-full py-4 text-[10px] font-bold text-red-400 uppercase border border-red-900/40 rounded-xl hover:bg-red-900/20 transition-colors">
+        <section id="tab-setup" class="hidden fade-in text-center pt-10">
+            <button onclick="resetFactory()" class="py-3 px-6 text-xs font-bold text-red-500 uppercase border border-red-900/50 rounded-xl hover:bg-red-900/20">
                 ⚠️ Restaurar Valores de Fábrica
             </button>
-            <p class="text-[9px] text-center text-slate-600 mt-4 font-mono">PhD OS v2.0 • LocalStorage System</p>
+            <p class="text-[9px] text-slate-600 mt-4">PhD v3.0 • Algoritmo Energético Dinámico</p>
         </section>
 
     </main>
 
     <script>
-        // --- BASE DE DATOS (Initial State) ---
-        // Aquí están tus ejercicios reales hardcodeados
+        // --- BASE DE DATOS INICIAL ---
         const defaultDB = {
-            macros: { p: 120, f: 78, c: 70 },
-            tasks: {
-                "APRENDIZAJE/PROGRAMACION": ["Estudiar Python 30min", "Leer Paper Nuevo"],
-                "SIMULACIONES/TESIS": ["Correr modelo COMSOL", "Redactar Metodología"],
-                "INGLES": ["Práctica Voxy", "Podcast BBC"],
-                "DEPORTE Y VIDA": ["Entrenar", "Comprar Kefir"]
-            },
-            gym: {
+            cals: 1462,
+            macros: { p: 120, f: 78 }, // Carbs se calculan solos
+            tasks: { "APRENDIZAJE": ["Python 30min"], "TESIS": ["Escribir Abstract"] },
+           gym: {
                 "Lunes": [
                     { name: "Hip Thrust", sets: "4x10", rpe: "8" },
                     { name: "RDL con barra", sets: "3x12", rpe: "8" },
@@ -232,142 +230,145 @@
             }
         };
 
-        // --- INICIALIZACIÓN (CAMBIAMOS A V2 PARA FORZAR ACTUALIZACIÓN) ---
-        let db = JSON.parse(localStorage.getItem('phd_db_v2')) || defaultDB;
+        // --- ESTADO (Versión 3.0) ---
+        let db = JSON.parse(localStorage.getItem('phd_db_v3')) || defaultDB;
         let isEditMode = false;
 
         function save() {
-            localStorage.setItem('phd_db_v2', JSON.stringify(db));
-            // Actualización visual inmediata
-            renderTasks();
-            calcFood();
+            localStorage.setItem('phd_db_v3', JSON.stringify(db));
+            renderMealCalculations();
         }
 
         // --- NAVEGACIÓN ---
         function setTab(tab) {
             ['focus', 'gym', 'fuel', 'setup'].forEach(t => {
                 document.getElementById('tab-'+t).classList.add('hidden');
-                document.getElementById('btn-'+t).className = "inactive-tab pb-3 w-1/4 transition-colors";
+                document.getElementById('btn-'+t).className = "inactive-tab pb-3 w-1/4";
             });
             document.getElementById('tab-'+tab).classList.remove('hidden');
-            document.getElementById('btn-'+tab).className = "active-tab pb-3 w-1/4 transition-colors";
+            document.getElementById('btn-'+tab).className = "active-tab pb-3 w-1/4";
         }
 
-        // --- FOCUS ---
-        function renderTasks() {
-            const container = document.getElementById('tasks-container');
-            container.innerHTML = '';
-            for (const [cat, items] of Object.entries(db.tasks)) {
-                let html = `<div class="glass p-4 rounded-2xl">
-                    <div class="flex justify-between items-center mb-3 border-b border-slate-700 pb-2">
-                        <h4 class="text-[10px] font-black text-blue-400 uppercase tracking-widest">${cat}</h4>
-                        <button onclick="addTask('${cat}')" class="text-xs font-bold text-slate-500 hover:text-white bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center">+</button>
-                    </div>
-                    <ul class="space-y-2">`;
-                items.forEach((task, idx) => {
-                    html += `<li class="flex items-center gap-3 group">
-                        <button onclick="delTask('${cat}', ${idx})" class="text-slate-600 hover:text-red-500 text-[10px]">✕</button>
-                        <span class="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">${task}</span>
-                    </li>`;
-                });
-                html += `</ul></div>`;
-                container.innerHTML += html;
-            }
-        }
-        function addTask(cat) { const t = prompt("Nueva tarea:"); if(t) { db.tasks[cat].push(t); save(); } }
-        function delTask(c, i) { if(confirm("¿Borrar?")) { db.tasks[c].splice(i, 1); save(); } }
-
-        // --- GYM ---
-        function renderGym() {
-            const day = document.getElementById('day-select').value;
-            const list = document.getElementById('gym-list');
-            list.innerHTML = '';
+        // --- ALGORITMO NUTRICIONAL (LA MAGIA) ---
+        function updateFromCals() {
+            // Escenario 1: Mueves el Slider de Calorías -> Se ajustan los macros proporcionalmente
+            const newCals = parseInt(document.getElementById('cals-slider').value);
+            db.cals = newCals;
+            document.getElementById('total-cals-display').innerText = newCals;
             
-            db.gym[day].forEach((ex, idx) => {
-                if(isEditMode) {
-                    list.innerHTML += `
-                    <div class="glass p-3 rounded-xl border border-blue-500/30">
-                        <input value="${ex.name}" onchange="updGym('${day}',${idx},'name',this.value)" class="mb-2 text-sm font-bold bg-slate-900">
-                        <div class="flex gap-2">
-                            <input value="${ex.sets}" onchange="updGym('${day}',${idx},'sets',this.value)" class="text-xs w-1/2 bg-slate-900 text-center">
-                            <input value="${ex.rpe}" onchange="updGym('${day}',${idx},'rpe',this.value)" class="text-xs w-1/2 bg-slate-900 text-center">
-                        </div>
-                        <button onclick="delGym('${day}',${idx})" class="w-full mt-2 text-[9px] font-bold text-red-400 uppercase bg-red-900/20 py-1 rounded">Eliminar</button>
-                    </div>`;
-                } else {
-                    list.innerHTML += `
-                    <div class="glass p-4 rounded-2xl flex justify-between items-center group hover:bg-slate-800/50 transition-colors">
-                        <div>
-                            <h4 class="font-bold text-white text-sm tracking-wide">${ex.name}</h4>
-                            <p class="text-xs text-slate-400 font-mono mt-1 group-hover:text-blue-400 transition-colors">${ex.sets}</p>
-                        </div>
-                        <div class="bg-slate-800 p-2 rounded-lg text-center min-w-[50px] border border-slate-700">
-                            <p class="text-[8px] text-slate-500 uppercase font-bold">RPE</p>
-                            <p class="text-blue-400 font-bold font-mono text-sm">${ex.rpe}</p>
-                        </div>
-                    </div>`;
-                }
-            });
-            if(isEditMode) list.innerHTML += `<button onclick="addGym('${day}')" class="w-full py-3 border-2 border-dashed border-slate-700 rounded-xl text-slate-500 text-xs font-bold uppercase hover:border-blue-500 hover:text-blue-500 transition-colors">+ Agregar Ejercicio</button>`;
-        }
-        function toggleEdit() {
-            isEditMode = !isEditMode;
-            const btn = document.getElementById('edit-btn');
-            btn.innerText = isEditMode ? "💾 Guardar" : "✎ Editar";
-            btn.className = isEditMode ? "text-[10px] font-bold text-green-400 uppercase border border-green-500/50 bg-green-900/20 px-3 py-2 rounded-lg" : "text-[10px] font-bold text-slate-400 uppercase border border-slate-600 px-3 py-2 rounded-lg hover:text-white";
-            renderGym();
-        }
-        function updGym(d,i,f,v) { db.gym[d][i][f] = v; save(); }
-        function addGym(d) { db.gym[d].push({name:"Nuevo Ejercicio", sets:"3x10", rpe:"8"}); save(); renderGym(); }
-        function delGym(d,i) { db.gym[d].splice(i,1); save(); renderGym(); }
-
-        // --- FUEL (Corrección de IDs) ---
-        function calcFood() {
-            const kefirProt = 8; // Vaso Kefir
-            const eggDinnerProt = 14; // Cena huevos
-            const fixedProt = kefirProt + eggDinnerProt;
+            // Distribución Estándar PhD: 30% Prot, 35% Grasa, 35% Carbs
+            db.macros.p = Math.round((newCals * 0.30) / 4);
+            db.macros.f = Math.round((newCals * 0.35) / 9);
             
-            const target = db.macros.p;
-            const remaining = target - fixedProt;
-            
-            // Verificación de seguridad para evitar errores NaN
-            const sourceEl = document.getElementById('protein-source');
-            const factor = sourceEl ? parseFloat(sourceEl.value) : 0.23;
-            
-            // Cálculo matemático
-            const grams = Math.max(0, Math.round(remaining / factor));
-            
-            // Actualizar DOM
-            document.getElementById('calc-result').innerText = grams;
-            document.getElementById('view-prot').innerText = db.macros.p + "g";
-            document.getElementById('view-fat').innerText = db.macros.f + "g";
-            document.getElementById('view-carbs').innerText = db.macros.c + "g";
+            updateUI_Macros();
+            save();
         }
 
-        // --- SETUP ---
-        function initSetup() {
+        function updateFromMacros(changed) {
+            // Escenario 2: Mueves un Macro Manual -> Se ajustan los Carbs (Resto)
+            if(changed === 'p') db.macros.p = parseInt(document.getElementById('input-prot').value);
+            if(changed === 'f') db.macros.f = parseInt(document.getElementById('input-fat').value);
+            
+            // Los Carbs absorben el cambio para mantener las Calorías Fijas
+            // Si quieres que las calorías cambien, usa el slider.
+            updateUI_Macros();
+            save();
+        }
+
+        function updateUI_Macros() {
+            // Calcular Carbs basados en el Resto: (Kcal - Prot*4 - Grasa*9) / 4
+            const caloriesUsed = (db.macros.p * 4) + (db.macros.f * 9);
+            const carbsCals = db.cals - caloriesUsed;
+            const carbsGrams = Math.max(0, Math.round(carbsCals / 4));
+
+            // Actualizar Inputs
             document.getElementById('input-prot').value = db.macros.p;
             document.getElementById('input-fat').value = db.macros.f;
-            document.getElementById('input-carbs').value = db.macros.c;
-        }
-        function saveSettings() {
-            db.macros.p = parseInt(document.getElementById('input-prot').value) || 0;
-            db.macros.f = parseInt(document.getElementById('input-fat').value) || 0;
-            db.macros.c = parseInt(document.getElementById('input-carbs').value) || 0;
-            save(); // Esto llama a calcFood y actualiza todo
-        }
-        function resetFactory() {
-            if(confirm("¿Segura? Se borrará todo.")) {
-                localStorage.removeItem('phd_db_v2');
-                location.reload();
-            }
+            document.getElementById('input-carbs').value = carbsGrams;
+
+            renderMealCalculations(carbsGrams);
         }
 
-        // --- ARRANQUE ---
+        function renderMealCalculations(totalCarbs) {
+            // Si no pasamos carbs, recálculos
+            if(!totalCarbs) {
+                const used = (db.macros.p * 4) + (db.macros.f * 9);
+                totalCarbs = Math.max(0, Math.round((db.cals - used) / 4));
+            }
+
+            // --- DISTRIBUCIÓN POR BLOQUES (SOP Logic) ---
+            // 1. Restamos el Kefir del Desayuno (Fijo) ~ 8g P, 5g F, 12g C
+            const kefirStats = { p: 8, f: 5, c: 12 };
+
+            // Metas por comida (Aprox: 25% Desayuno, 40% Almuerzo, 35% Cena)
+            const bfTarget = { 
+                p: Math.round(db.macros.p * 0.25) - kefirStats.p, 
+                f: Math.round(db.macros.f * 0.25) - kefirStats.f,
+                c: Math.round(totalCarbs * 0.25) - kefirStats.c
+            };
+            
+            const lunchTarget = {
+                p: Math.round(db.macros.p * 0.40),
+                f: Math.round(db.macros.f * 0.40),
+                c: Math.round(totalCarbs * 0.40)
+            };
+
+            const dinnerTarget = {
+                p: Math.round(db.macros.p * 0.35),
+                f: Math.round(db.macros.f * 0.35),
+                c: Math.round(totalCarbs * 0.35)
+            };
+
+            // RENDER DESAYUNO
+            document.getElementById('bf-prot').innerText = Math.max(0, bfTarget.p);
+            document.getElementById('bf-fat').innerText = Math.max(0, bfTarget.f);
+            document.getElementById('bf-carbs').innerText = Math.max(0, bfTarget.c);
+
+            // RENDER ALMUERZO (Calculadora de Gramos)
+            const meatFactor = parseFloat(document.getElementById('lunch-source').value);
+            const carbFactor = parseFloat(document.getElementById('lunch-carb-source').value);
+            
+            document.getElementById('lunch-grams-prot').innerText = Math.round(lunchTarget.p / meatFactor) + "g";
+            document.getElementById('lunch-grams-carb').innerText = Math.round(lunchTarget.c / carbFactor) + "g";
+
+            // RENDER CENA (Resumen)
+            document.getElementById('dinner-prot').innerText = lunchTarget.p; // Cena similar a almuerzo en macros
+            document.getElementById('dinner-fat').innerText = lunchTarget.f;
+            document.getElementById('dinner-carbs').innerText = lunchTarget.c;
+        }
+
+        // --- UTILS GYM & TASKS (Igual que v2) ---
+        function renderTasks() {
+            const c = document.getElementById('tasks-container'); c.innerHTML = '';
+            for(const [k,v] of Object.entries(db.tasks)) {
+                let h = `<div class="glass p-3 rounded-xl mb-2"><h4 class="text-xs font-bold text-blue-400 mb-2">${k} <button onclick="addTask('${k}')" class="ml-2 text-white">+</button></h4><ul>`;
+                v.forEach((t,i)=> h+=`<li class="text-xs text-slate-300 flex justify-between">${t} <button onclick="delTask('${k}',${i})" class="text-red-400">x</button></li>`);
+                c.innerHTML += h + '</ul></div>';
+            }
+        }
+        function addTask(k){ const t=prompt("Tarea:"); if(t){db.tasks[k].push(t); save(); renderTasks()}}
+        function delTask(k,i){ if(confirm("¿Borrar?")){db.tasks[k].splice(i,1); save(); renderTasks()}}
+
+        function renderGym() {
+            const day = document.getElementById('day-select').value;
+            const list = document.getElementById('gym-list'); list.innerHTML = '';
+            db.gym[day].forEach((ex,i) => {
+                if(isEditMode) list.innerHTML += `<div class="bg-slate-800 p-2 mb-2 rounded"><input value="${ex.name}" onchange="updGym('${day}',${i},'name',this.value)" class="bg-transparent text-sm font-bold w-full mb-1"><div class="flex gap-2"><input value="${ex.sets}" onchange="updGym('${day}',${i},'sets',this.value)" class="bg-slate-900 w-1/2 text-xs"><input value="${ex.rpe}" onchange="updGym('${day}',${i},'rpe',this.value)" class="bg-slate-900 w-1/2 text-xs"></div><button onclick="delGym('${day}',${i})" class="text-red-400 text-[10px] mt-1">Eliminar</button></div>`;
+                else list.innerHTML += `<div class="glass p-3 rounded-xl flex justify-between items-center"><div class="text-sm font-bold text-white">${ex.name}<br><span class="text-xs text-slate-400 font-normal">${ex.sets}</span></div><div class="bg-slate-800 px-2 py-1 rounded text-center"><span class="text-[8px] text-slate-500 block">RPE</span><span class="text-blue-400 font-bold">${ex.rpe}</span></div></div>`;
+            });
+            if(isEditMode) list.innerHTML += `<button onclick="addGym('${day}')" class="w-full py-2 border border-dashed border-slate-600 text-slate-500 text-xs rounded mt-2">+ Ejercicio</button>`;
+        }
+        function toggleEdit(){ isEditMode=!isEditMode; document.getElementById('edit-btn').innerText=isEditMode?"Guardar":"Editar"; renderGym(); }
+        function updGym(d,i,f,v){ db.gym[d][i][f]=v; save(); }
+        function addGym(d){ db.gym[d].push({name:"Nuevo", sets:"3x10", rpe:"8"}); save(); renderGym(); }
+        function delGym(d,i){ db.gym[d].splice(i,1); save(); renderGym(); }
+        function resetFactory(){ if(confirm("Reset?")) { localStorage.removeItem('phd_db_v3'); location.reload(); } }
+
+        // INIT
+        document.getElementById('cals-slider').value = db.cals;
+        updateFromCals(); // Calcular todo al inicio
         renderTasks();
         renderGym();
-        initSetup();
-        calcFood(); // IMPORTANTE: Calcular al inicio
     </script>
 </body>
 </html>
