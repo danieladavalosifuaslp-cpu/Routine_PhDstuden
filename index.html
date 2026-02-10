@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhD Routine v4.1 Bio</title>
+    <title>PhD Routine v4.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +22,7 @@
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-black italic tracking-tighter text-white">DAILY <span class="text-blue-500">ROUTINE</span></h1>
             <div class="bg-blue-900/20 px-3 py-1 rounded-full border border-blue-500/20">
-                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.0 Bio-Métrica</span>
+                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.1 Instant</span>
             </div>
         </div>
         <nav class="max-w-md mx-auto mt-4 flex justify-between text-[10px] font-bold uppercase tracking-widest border-b border-slate-800 overflow-x-auto">
@@ -42,15 +42,15 @@
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="text-[10px] text-slate-400 uppercase">Peso (kg)</label>
-                        <input type="number" id="user-weight" placeholder="60" onchange="calculateMacros()">
+                        <input type="number" id="user-weight" placeholder="Ej: 73" oninput="calculateMacros()">
                     </div>
                     <div>
                         <label class="text-[10px] text-slate-400 uppercase">Altura (cm)</label>
-                        <input type="number" id="user-height" placeholder="160" onchange="calculateMacros()">
+                        <input type="number" id="user-height" placeholder="Ej: 162" oninput="calculateMacros()">
                     </div>
                     <div>
                         <label class="text-[10px] text-slate-400 uppercase">Edad</label>
-                        <input type="number" id="user-age" placeholder="28" onchange="calculateMacros()">
+                        <input type="number" id="user-age" placeholder="Ej: 28" oninput="calculateMacros()">
                     </div>
                     <div>
                         <label class="text-[10px] text-slate-400 uppercase">Actividad</label>
@@ -64,13 +64,12 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label class="text-[10px] text-slate-400 uppercase">Biotipo (Forma del cuerpo)</label>
+                    <label class="text-[10px] text-slate-400 uppercase">Biotipo</label>
                     <select id="user-type" onchange="calculateMacros()" class="bg-purple-900/20 border-purple-500/50">
                         <option value="normo">Mesomorfa (Normal)</option>
                         <option value="endo">Endomorfa (Tiende a acumular grasa)</option>
                         <option value="ecto">Ectomorfa (Le cuesta subir peso)</option>
                     </select>
-                    <p class="text-[9px] text-slate-500 mt-1 italic">*Endomorfa ajustará menos carbs y más grasa automáticamente.</p>
                 </div>
 
                 <div class="mb-4">
@@ -82,13 +81,13 @@
                     </select>
                 </div>
 
-                <div class="bg-slate-800 p-3 rounded-xl text-center">
+                <div class="bg-slate-800 p-3 rounded-xl text-center transition-all duration-300">
                     <p class="text-[10px] text-slate-400 uppercase">Calorías Calculadas</p>
-                    <p class="text-2xl font-black text-white" id="display-cals">0</p>
-                    <p class="text-[9px] text-green-400" id="display-goal-text">Esperando datos...</p>
+                    <p class="text-3xl font-black text-white" id="display-cals">0</p>
+                    <p class="text-[9px] text-green-400" id="display-goal-text">Completa todos los datos...</p>
                 </div>
             </div>
-            <p class="text-[10px] text-center text-slate-500">Fórmula Harris-Benedict Mejorada</p>
+            <p class="text-[10px] text-center text-slate-500">Cálculo Automático: Harris-Benedict</p>
         </section>
 
         <section id="tab-focus" class="hidden fade-in">
@@ -117,7 +116,6 @@
         </section>
 
         <section id="tab-fuel" class="hidden fade-in space-y-6">
-            
             <div class="glass p-5 rounded-3xl border border-blue-500/20">
                 <div class="flex justify-between items-end mb-4">
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Tus Macros Diarios</h3>
@@ -141,8 +139,6 @@
 
             <div class="glass p-5 rounded-3xl border-l-4 border-green-500">
                 <h3 class="font-bold text-white text-sm uppercase mb-3">⚖️ Conversor de Comida</h3>
-                <p class="text-[10px] text-slate-400 mb-2">"Si necesito <span class="text-white font-bold">25g</span> de proteína, ¿cuánto pollo es?"</p>
-                
                 <div class="flex gap-2 mb-3">
                     <input type="number" id="convert-amount" placeholder="Gramos de Macro" class="w-1/2">
                     <select id="convert-type" class="w-1/2 text-xs">
@@ -150,11 +146,8 @@
                         <option value="carb">de Carbohidratos</option>
                     </select>
                 </div>
-                
-                <button onclick="convertFood()" class="w-full bg-slate-700 py-2 rounded-lg text-xs font-bold uppercase mb-4">Calcular Equivalencias</button>
-                
-                <div id="conversion-results" class="space-y-2 text-xs text-slate-300 hidden">
-                    </div>
+                <button onclick="convertFood()" class="w-full bg-slate-700 py-2 rounded-lg text-xs font-bold uppercase mb-4">Calcular</button>
+                <div id="conversion-results" class="space-y-2 text-xs text-slate-300 hidden"></div>
             </div>
 
             <div class="glass p-4 rounded-xl">
@@ -164,7 +157,7 @@
                      <li class="flex justify-between"><span>Almuerzo (40%):</span> <span id="dist-ln" class="text-white">...</span></li>
                      <li class="flex justify-between"><span>Cena (35%):</span> <span id="dist-dn" class="text-white">...</span></li>
                  </ul>
-                 <p class="text-[9px] text-slate-500 mt-2">*Recuerda restar el Smoothie de Kefir de tus macros del desayuno.</p>
+                 <p class="text-[9px] text-slate-500 mt-2">*Recuerda restar el Smoothie de Kefir.</p>
             </div>
         </section>
 
@@ -172,23 +165,19 @@
             <div class="glass p-6 rounded-3xl text-center">
                 <div class="text-4xl mb-2">🤖</div>
                 <h2 class="text-xl font-black text-white">Consultorio IA</h2>
-                <p class="text-xs text-slate-400 mb-6">Pregunta tus dudas específicas. Te redirigiré a ChatGPT con tus datos ya cargados.</p>
-
-                <textarea id="ai-question" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white mb-4" placeholder="Ej: Soy endomorfa, mido 1.60 y peso 65kg. ¿Me recomiendas hacer ayuno intermitente? ¿Qué snacks puedo comer que sean bajos en carbohidratos?"></textarea>
-                
+                <p class="text-xs text-slate-400 mb-6">Tus datos biométricos se enviarán automáticamente con tu pregunta.</p>
+                <textarea id="ai-question" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white mb-4" placeholder="Ej: ¿Qué puedo cenar ligero que cumpla mis macros?"></textarea>
                 <button onclick="askRealAI()" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-green-900/20">
                     Enviar a ChatGPT ↗
                 </button>
-                <p class="text-[9px] text-slate-600 mt-2">Se abrirá una nueva pestaña</p>
             </div>
         </section>
 
     </main>
 
     <script>
-        // --- BASE DE DATOS ---
         const defaultDB = {
-            profile: { w: '', h: '', a: '', act: '1.2', type: 'normo', goal: 'maintain' },
+            profile: { w: '', h: '', a: '', act: '1.55', type: 'endo', goal: 'cut' },
             cals: 0,
             macros: { p: 0, f: 0, c: 0 },
             tasks: { "APRENDIZAJE": ["Python 30min"], "TESIS": ["Escribir Abstract"] },
@@ -206,7 +195,6 @@
 
         function save() { localStorage.setItem('phd_db_v4', JSON.stringify(db)); }
 
-        // --- NAVEGACIÓN ---
         function setTab(tab) {
             ['profile', 'focus', 'gym', 'fuel', 'chat'].forEach(t => {
                 document.getElementById('tab-'+t).classList.add('hidden');
@@ -220,7 +208,7 @@
             if(tab === 'profile') loadProfileInputs();
         }
 
-        // --- 1. PERFIL & CÁLCULOS REALES (HARRIS-BENEDICT) ---
+        // --- LÓGICA PERFIL ---
         function loadProfileInputs() {
             document.getElementById('user-weight').value = db.profile.w;
             document.getElementById('user-height').value = db.profile.h;
@@ -228,11 +216,10 @@
             document.getElementById('user-activity').value = db.profile.act;
             document.getElementById('user-type').value = db.profile.type;
             document.getElementById('user-goal').value = db.profile.goal;
-            calculateMacros(false); // Render sin guardar para no ciclar
+            calculateMacros(false);
         }
 
         function calculateMacros(shouldSave = true) {
-            // Obtener valores
             const w = parseFloat(document.getElementById('user-weight').value);
             const h = parseFloat(document.getElementById('user-height').value);
             const a = parseFloat(document.getElementById('user-age').value);
@@ -241,58 +228,37 @@
             const goal = document.getElementById('user-goal').value;
 
             if(!w || !h || !a) {
+                document.getElementById('display-cals').innerText = "0";
                 document.getElementById('display-goal-text').innerText = "Completa los datos...";
                 return;
             }
 
-            // Guardar en DB
-            if(shouldSave) {
-                db.profile = { w, h, a, act, type, goal };
-            }
+            if(shouldSave) db.profile = { w, h, a, act, type, goal };
 
-            // 1. Calcular TMB (Tasa Metabólica Basal) - Fórmula Mujer
-            // BMR = 447.593 + (9.247 × kg) + (3.098 × cm) - (4.330 × edad)
+            // Harris-Benedict (Mujer)
             let bmr = 447.593 + (9.247 * w) + (3.098 * h) - (4.330 * a);
-
-            // 2. Calcular TDEE (Gasto Energético Total)
             let tdee = bmr * act;
-
-            // 3. Ajuste por Objetivo
             let targetCals = tdee;
             let text = "Mantenimiento";
             
             if(goal === 'cut') { targetCals -= 350; text = "Déficit (Quema Grasa)"; }
             if(goal === 'bulk') { targetCals += 300; text = "Superávit (Ganancia)"; }
 
-            // 4. Distribución de Macros según BIOTIPO (Endomorfa vs Normal)
-            let p_ratio, f_ratio, c_ratio;
+            // Macros según Biotipo
+            let p_ratio = 0.30, f_ratio = 0.30, c_ratio = 0.40; // Normal
+            if(type === 'endo') { p_ratio = 0.35; f_ratio = 0.40; c_ratio = 0.25; }
+            if(type === 'ecto') { p_ratio = 0.25; f_ratio = 0.20; c_ratio = 0.55; }
 
-            if(type === 'endo') {
-                // Endomorfa: Menos carbs, más grasa y prote
-                p_ratio = 0.35; f_ratio = 0.40; c_ratio = 0.25;
-            } else if (type === 'ecto') {
-                // Ectomorfa: Más carbs
-                p_ratio = 0.25; f_ratio = 0.20; c_ratio = 0.55;
-            } else {
-                // Mesomorfa/Normal
-                p_ratio = 0.30; f_ratio = 0.30; c_ratio = 0.40;
-            }
-
-            // Calcular Gramos
             const p_g = Math.round((targetCals * p_ratio) / 4);
             const f_g = Math.round((targetCals * f_ratio) / 9);
             const c_g = Math.round((targetCals * c_ratio) / 4);
 
-            // Actualizar DB global
             db.cals = Math.round(targetCals);
             db.macros = { p: p_g, f: f_g, c: c_g };
             if(shouldSave) save();
 
-            // Renderizar Perfil
             document.getElementById('display-cals').innerText = Math.round(targetCals);
             document.getElementById('display-goal-text').innerText = text;
-
-            // Renderizar Fuel Tab (en background)
             renderFuelUI();
         }
 
@@ -302,14 +268,12 @@
             document.getElementById('fuel-fat').innerText = db.macros.f;
             document.getElementById('fuel-carbs').innerText = db.macros.c;
 
-            // Distribución sugerida texto
             const mkText = (ratio) => `P:${Math.round(db.macros.p*ratio)}g / G:${Math.round(db.macros.f*ratio)}g / C:${Math.round(db.macros.c*ratio)}g`;
             document.getElementById('dist-bf').innerText = mkText(0.25);
             document.getElementById('dist-ln').innerText = mkText(0.40);
             document.getElementById('dist-dn').innerText = mkText(0.35);
         }
 
-        // --- CONVERSOR DE COMIDA ---
         function convertFood() {
             const amount = parseFloat(document.getElementById('convert-amount').value);
             const type = document.getElementById('convert-type').value;
@@ -337,21 +301,15 @@
             res.classList.remove('hidden');
         }
 
-        // --- IA CHAT BRIDGE ---
         function askRealAI() {
             const q = document.getElementById('ai-question').value;
             if(!q) return alert("Escribe una pregunta primero :)");
-
-            // Crear el Prompt Contextualizado
             const context = `Soy mujer, ${db.profile.a} años, mido ${db.profile.h}cm y peso ${db.profile.w}kg. Mi biotipo es ${db.profile.type === 'endo' ? 'Endomorfa' : 'Normal'}. Mi actividad física es factor ${db.profile.act}. Mi objetivo es ${db.profile.goal}. `;
             const fullPrompt = context + " Pregunta: " + q;
-
-            // Abrir ChatGPT con el prompt
-            const url = `https://chatgpt.com/?q=${encodeURIComponent(fullPrompt)}`;
-            window.open(url, '_blank');
+            window.open(`https://chatgpt.com/?q=${encodeURIComponent(fullPrompt)}`, '_blank');
         }
 
-        // --- FOCUS & GYM (UNCHANGED) ---
+        // --- UTILS FOCUS & GYM (Sin Cambios) ---
         function renderTasks() {
             const c = document.getElementById('tasks-container'); c.innerHTML = '';
             for(const [k,v] of Object.entries(db.tasks)) {
@@ -379,10 +337,11 @@
         function delGym(d,i){ db.gym[d].splice(i,1); renderGym(); }
 
         // INIT
-        setTab('focus');
+        setTab('profile'); // Carga inicial
     </script>
 </body>
 </html>
+
 
 
 
