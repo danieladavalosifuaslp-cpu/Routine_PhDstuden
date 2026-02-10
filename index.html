@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhD Routine v4.1</title>
+    <title>PhD Routine v4.2 Calibrada</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +22,7 @@
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-black italic tracking-tighter text-white">DAILY <span class="text-blue-500">ROUTINE</span></h1>
             <div class="bg-blue-900/20 px-3 py-1 rounded-full border border-blue-500/20">
-                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.1 Instant</span>
+                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.2 Calibrada</span>
             </div>
         </div>
         <nav class="max-w-md mx-auto mt-4 flex justify-between text-[10px] font-bold uppercase tracking-widest border-b border-slate-800 overflow-x-auto">
@@ -87,7 +87,7 @@
                     <p class="text-[9px] text-green-400" id="display-goal-text">Completa todos los datos...</p>
                 </div>
             </div>
-            <p class="text-[10px] text-center text-slate-500">Cálculo Automático: Harris-Benedict</p>
+            <p class="text-[10px] text-center text-slate-500">Cálculo Automático: Harris-Benedict Ajustado</p>
         </section>
 
         <section id="tab-focus" class="hidden fade-in">
@@ -177,7 +177,7 @@
 
     <script>
         const defaultDB = {
-            profile: { w: '', h: '', a: '', act: '1.55', type: 'endo', goal: 'cut' },
+            profile: { w: '', h: '', a: '', act: '1.375', type: 'endo', goal: 'cut' },
             cals: 0,
             macros: { p: 0, f: 0, c: 0 },
             tasks: { "APRENDIZAJE": ["Python 30min"], "TESIS": ["Escribir Abstract"] },
@@ -208,7 +208,7 @@
             if(tab === 'profile') loadProfileInputs();
         }
 
-        // --- LÓGICA PERFIL ---
+        // --- LÓGICA PERFIL (CALIBRADA) ---
         function loadProfileInputs() {
             document.getElementById('user-weight').value = db.profile.w;
             document.getElementById('user-height').value = db.profile.h;
@@ -241,7 +241,8 @@
             let targetCals = tdee;
             let text = "Mantenimiento";
             
-            if(goal === 'cut') { targetCals -= 350; text = "Déficit (Quema Grasa)"; }
+            // --- AJUSTE DE CALIBRACIÓN AQUÍ ---
+            if(goal === 'cut') { targetCals -= 500; text = "Déficit (Quema Grasa)"; } // Se cambió 350 por 500
             if(goal === 'bulk') { targetCals += 300; text = "Superávit (Ganancia)"; }
 
             // Macros según Biotipo
@@ -341,8 +342,6 @@
     </script>
 </body>
 </html>
-
-
 
 
 
