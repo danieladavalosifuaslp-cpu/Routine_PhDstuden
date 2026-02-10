@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhD Routine v4.2 Calibrada</title>
+    <title>PhD Routine v4.3 Menús</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
@@ -14,6 +14,9 @@
         select, input { background: #1e293b; color: white; border: 1px solid #334155; padding: 8px; border-radius: 8px; width: 100%; outline: none; }
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Estilos para las listas del menú */
+        ul.menu-list li { position: relative; padding-left: 1.2em; }
+        ul.menu-list li::before { content: '•'; position: absolute; left: 0; color: currentColor; opacity: 0.6; }
     </style>
 </head>
 <body class="pb-32 bg-[#0f172a]">
@@ -22,7 +25,7 @@
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-black italic tracking-tighter text-white">DAILY <span class="text-blue-500">ROUTINE</span></h1>
             <div class="bg-blue-900/20 px-3 py-1 rounded-full border border-blue-500/20">
-                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.2 Calibrada</span>
+                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.3 Menús</span>
             </div>
         </div>
         <nav class="max-w-md mx-auto mt-4 flex justify-between text-[10px] font-bold uppercase tracking-widest border-b border-slate-800 overflow-x-auto">
@@ -150,14 +153,41 @@
                 <div id="conversion-results" class="space-y-2 text-xs text-slate-300 hidden"></div>
             </div>
 
-            <div class="glass p-4 rounded-xl">
-                 <h3 class="text-xs font-bold text-slate-500 uppercase mb-2">Distribución Sugerida</h3>
-                 <ul class="text-xs space-y-2 font-mono text-slate-300">
-                     <li class="flex justify-between"><span>Desayuno (25%):</span> <span id="dist-bf" class="text-white">...</span></li>
-                     <li class="flex justify-between"><span>Almuerzo (40%):</span> <span id="dist-ln" class="text-white">...</span></li>
-                     <li class="flex justify-between"><span>Cena (35%):</span> <span id="dist-dn" class="text-white">...</span></li>
-                 </ul>
-                 <p class="text-[9px] text-slate-500 mt-2">*Recuerda restar el Smoothie de Kefir.</p>
+            <div class="space-y-4">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Ejemplos de Menú (Base Endomorfa)</h3>
+                <p class="text-[10px] text-slate-500 text-center italic mb-4">Estos son ejemplos base. Ajusta las cantidades para pegarle a tus totales de arriba 👆</p>
+            
+                <div class="glass p-4 rounded-xl border-l-2 border-blue-400">
+                    <h4 class="text-sm font-bold text-blue-300 mb-2">🍳 Desayuno "Focus"</h4>
+                    <ul class="menu-list text-xs text-slate-300 space-y-1 mb-2">
+                        <li>2 Huevos enteros + 1/2 taza claras</li>
+                        <li>1 taza de espinacas con champiñones</li>
+                        <li>1 rebanada de pan Ezequiel (o integral denso)</li>
+                        <li>*Tu shot de Kéfir aparte</li>
+                    </ul>
+                    <p class="text-[9px] text-blue-400 font-mono text-right">(~28g Prot / 12g Grasa / 18g Carbs)</p>
+                </div>
+            
+                <div class="glass p-4 rounded-xl border-l-2 border-amber-400">
+                    <h4 class="text-sm font-bold text-amber-300 mb-2">🥗 Comida "Energía Estable"</h4>
+                    <ul class="menu-list text-xs text-slate-300 space-y-1 mb-2">
+                        <li>120g-150g Pechuga de pollo a la plancha</li>
+                        <li>Ensalada grande (lechugas, pepino, tomate)</li>
+                        <li>1/4 de aguacate (grasa buena)</li>
+                        <li>1/2 taza de quinoa cocida o lentejas</li>
+                    </ul>
+                    <p class="text-[9px] text-amber-400 font-mono text-right">(~40g Prot / 15g Grasa / 35g Carbs)</p>
+                </div>
+            
+                <div class="glass p-4 rounded-xl border-l-2 border-purple-400">
+                    <h4 class="text-sm font-bold text-purple-300 mb-2">🐟 Cena "Recuperación Ligera"</h4>
+                    <ul class="menu-list text-xs text-slate-300 space-y-1 mb-2">
+                        <li>150g Pescado blanco (Tilapia/Merluza) al horno</li>
+                        <li>Tazón de brócoli y espárragos al vapor</li>
+                        <li>1 cucharadita aceite de oliva (sobre verdura)</li>
+                    </ul>
+                    <p class="text-[9px] text-purple-400 font-mono text-right">(~35g Prot / 8g Grasa / 10g Carbs)</p>
+                </div>
             </div>
         </section>
 
@@ -241,8 +271,8 @@
             let targetCals = tdee;
             let text = "Mantenimiento";
             
-            // --- AJUSTE DE CALIBRACIÓN AQUÍ ---
-            if(goal === 'cut') { targetCals -= 500; text = "Déficit (Quema Grasa)"; } // Se cambió 350 por 500
+            // --- AJUSTE DE CALIBRACIÓN (500 cal) ---
+            if(goal === 'cut') { targetCals -= 500; text = "Déficit (Quema Grasa)"; }
             if(goal === 'bulk') { targetCals += 300; text = "Superávit (Ganancia)"; }
 
             // Macros según Biotipo
@@ -268,11 +298,7 @@
             document.getElementById('fuel-prot').innerText = db.macros.p;
             document.getElementById('fuel-fat').innerText = db.macros.f;
             document.getElementById('fuel-carbs').innerText = db.macros.c;
-
-            const mkText = (ratio) => `P:${Math.round(db.macros.p*ratio)}g / G:${Math.round(db.macros.f*ratio)}g / C:${Math.round(db.macros.c*ratio)}g`;
-            document.getElementById('dist-bf').innerText = mkText(0.25);
-            document.getElementById('dist-ln').innerText = mkText(0.40);
-            document.getElementById('dist-dn').innerText = mkText(0.35);
+            // Se eliminó la parte que intentaba actualizar la lista de porcentajes que ya no existe.
         }
 
         function convertFood() {
@@ -342,7 +368,3 @@
     </script>
 </body>
 </html>
-
-
-
-
