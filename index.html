@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhD Routine v4.4 Final</title>
+    <title>PhD Routine v4.4 DR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
@@ -159,33 +159,30 @@
                 <div class="glass p-4 rounded-xl border-l-2 border-blue-400">
                     <h4 class="text-sm font-bold text-blue-300 mb-2">🍳 Desayuno "Focus"</h4>
                     <ul class="menu-list text-xs text-slate-300 space-y-1 mb-2">
-                        <li>2 Huevos enteros + 1/2 taza claras</li>
+                        <li>2 Huevos enteros + 3/4 taza claras</li>
                         <li>1 taza de espinacas con champiñones</li>
                         <li>1 rebanada de pan Ezequiel (o integral denso)</li>
-                        <li>*Tu shot de Kéfir aparte</li>
+                        <li>*Tu shot de Kéfir y frutos rojos</li>
+                        <li> 1/4 de aguacate (grasa buena)</li>
                     </ul>
-                    <p class="text-[9px] text-blue-400 font-mono text-right">(~28g Prot / 12g Grasa / 18g Carbs)</p>
                 </div>
             
                 <div class="glass p-4 rounded-xl border-l-2 border-amber-400">
-                    <h4 class="text-sm font-bold text-amber-300 mb-2">🥗 Comida "Energía Estable"</h4>
+                    <h4 class="text-sm font-bold text-amber-300 mb-2">🥗 Comida</h4>
                     <ul class="menu-list text-xs text-slate-300 space-y-1 mb-2">
                         <li>120g-150g Pechuga de pollo a la plancha</li>
                         <li>Ensalada grande (lechugas, pepino, tomate)</li>
-                        <li>1/4 de aguacate (grasa buena)</li>
-                        <li>1/2 taza de quinoa cocida o lentejas</li>
+                        <li>200 g de papa cocida</li>
                     </ul>
-                    <p class="text-[9px] text-amber-400 font-mono text-right">(~40g Prot / 15g Grasa / 35g Carbs)</p>
                 </div>
             
                 <div class="glass p-4 rounded-xl border-l-2 border-purple-400">
-                    <h4 class="text-sm font-bold text-purple-300 mb-2">🐟 Cena "Recuperación Ligera"</h4>
+                    <h4 class="text-sm font-bold text-purple-300 mb-2">🐟 Cena </h4>
                     <ul class="menu-list text-xs text-slate-300 space-y-1 mb-2">
                         <li>150g Pescado blanco (Tilapia/Merluza) al horno</li>
                         <li>Tazón de brócoli y espárragos al vapor</li>
-                        <li>1 cucharadita aceite de oliva (sobre verdura)</li>
+                        <li>1/4 aguacate (grasa buena)/li>
                     </ul>
-                    <p class="text-[9px] text-purple-400 font-mono text-right">(~35g Prot / 8g Grasa / 10g Carbs)</p>
                 </div>
             </div>
         </section>
@@ -268,7 +265,7 @@
             if(shouldSave) db.profile = { w, h, a, act, type, goal };
 
             // Harris-Benedict (Mujer)
-            let bmr = 447.593 + (9.247 * w) + (3.098 * h) - (4.330 * a);
+            let bmr = 655.1 + (9.563 * w) + (1.850 * h) - (4.676 * a);
             let tdee = bmr * act;
             let targetCals = tdee;
             let text = "Mantenimiento";
@@ -278,9 +275,9 @@
             if(goal === 'bulk') { targetCals += 300; text = "Superávit (Ganancia)"; }
 
             // Macros según Biotipo
-            let p_ratio = 0.30, f_ratio = 0.30, c_ratio = 0.40; // Normal
-            if(type === 'endo') { p_ratio = 0.35; f_ratio = 0.40; c_ratio = 0.25; }
-            if(type === 'ecto') { p_ratio = 0.25; f_ratio = 0.20; c_ratio = 0.55; }
+            let p_ratio = 0.40, f_ratio = 0.30, c_ratio = 0.30; // Normal
+            if(type === 'endo') { p_ratio = 0.40; f_ratio = 0.20; c_ratio = 0.25; }
+            if(type === 'ecto') { p_ratio = 0.25; f_ratio = 0.25; c_ratio = 0.55; }
 
             const p_g = Math.round((targetCals * p_ratio) / 4);
             const f_g = Math.round((targetCals * f_ratio) / 9);
@@ -313,19 +310,19 @@
             let html = "";
             if(type === 'prot') {
                 html = `
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍗 Pechuga Pollo (Cruda)</span> <span class="text-white font-bold">${Math.round(amount/0.23)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🐟 Pescado Blanco</span> <span class="text-white font-bold">${Math.round(amount/0.20)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥩 Res Magra</span> <span class="text-white font-bold">${Math.round(amount/0.22)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥚 Huevos Enteros</span> <span class="text-white font-bold">${Math.round(amount/6)} pzas</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍗 Pechuga Pollo (Cruda)</span> <span class="text-white font-bold">${Math.round(amount/0.25)}g</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🐟 Pescado Blanco</span> <span class="text-white font-bold">${Math.round(amount/0.18)}g</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥩 Res Magra</span> <span class="text-white font-bold">${Math.round(amount/0.23)}g</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥚 Huevos Enteros</span> <span class="text-white font-bold">${Math.round(amount/0.12)} pzas</span></div>
                 <div class="flex justify-between"><span>🥛 Whey Protein</span> <span class="text-white font-bold">${Math.round(amount/0.80)}g</span></div>
                 <p class="text-[9px] text-slate-500 mt-2 text-center">💡 ¿Quieres usar Jamón o Salchicha? Pregúntale a la IA en el chat.</p>`;
             } else {
                 html = `
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍚 Arroz (Pesado Cocido)</span> <span class="text-white font-bold">${Math.round(amount/0.28)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍝 Pasta (Pesado Cocido)</span> <span class="text-white font-bold">${Math.round(amount/0.25)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥔 Papa Cocida</span> <span class="text-white font-bold">${Math.round(amount/0.20)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥣 Avena (Cruda)</span> <span class="text-white font-bold">${Math.round(amount/0.60)}g</span></div>
-                <div class="flex justify-between"><span>🍎 Manzana/Fruta</span> <span class="text-white font-bold">${Math.round(amount/0.14)}g</span></div>`;
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍚 Arroz integral (Pesado Cocido)</span> <span class="text-white font-bold">${Math.round(amount/0.80)}g</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍝 Pasta (Pesado Cocido)</span> <span class="text-white font-bold">${Math.round(amount/0.75)}g</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥔 Papa Cocida</span> <span class="text-white font-bold">${Math.round(amount/0.25)}g</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥣 Avena (Cruda)</span> <span class="text-white font-bold">${Math.round(amount/0.65)}g</span></div>
+                <div class="flex justify-between"><span>🍎 Manzana/Fruta</span> <span class="text-white font-bold">${Math.round(amount/0.15)}g</span></div>`;
             }
             res.innerHTML = html;
             res.classList.remove('hidden');
