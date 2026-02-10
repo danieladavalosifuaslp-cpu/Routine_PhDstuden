@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhD Routine v4.4 DR</title>
+    <title>PhD Routine v4.4 Final</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
@@ -65,7 +65,15 @@
                     </div>
                 </div>
                 
-                
+                <div class="mb-4">
+                    <label class="text-[10px] text-slate-400 uppercase">Biotipo</label>
+                    <select id="user-type" onchange="calculateMacros()" class="bg-purple-900/20 border-purple-500/50">
+                        <option value="normo">Mesomorfa (Normal)</option>
+                        <option value="endo">Endomorfa (Tiende a acumular grasa)</option>
+                        <option value="ecto">Ectomorfa (Le cuesta subir peso)</option>
+                    </select>
+                </div>
+
                 <div class="mb-4">
                     <label class="text-[10px] text-slate-400 uppercase">Objetivo Actual</label>
                     <select id="user-goal" onchange="calculateMacros()">
