@@ -24,7 +24,7 @@
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-black italic tracking-tighter text-white">DAILY <span class="text-blue-500">ROUTINE</span></h1>
             <div class="bg-blue-900/20 px-3 py-1 rounded-full border border-blue-500/20">
-                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.4 Final</span>
+                <span class="text-[10px] text-blue-400 font-bold uppercase">v4.4 PhD DDR</span>
             </div>
         </div>
         <nav class="max-w-md mx-auto mt-4 flex justify-between text-[10px] font-bold uppercase tracking-widest border-b border-slate-800 overflow-x-auto">
@@ -146,6 +146,7 @@
                     <select id="convert-type" class="w-1/2 text-xs">
                         <option value="prot">de Proteína</option>
                         <option value="carb">de Carbohidratos</option>
+                        <option value="fat">de Grasa</option>
                     </select>
                 </div>
                 <button onclick="convertFood()" class="w-full bg-slate-700 py-2 rounded-lg text-xs font-bold uppercase mb-4">Calcular</button>
@@ -153,7 +154,7 @@
             </div>
 
             <div class="space-y-4">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Ejemplos de Menú (Base Endomorfa)</h3>
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Ejemplos de Menú </h3>
                 <p class="text-[10px] text-slate-500 text-center italic mb-4">Estos son ejemplos base. Usa el chat para ajustar cantidades según tus macros 👆</p>
             
                 <div class="glass p-4 rounded-xl border-l-2 border-blue-400">
@@ -313,7 +314,7 @@
                 <div class="flex justify-between border-b border-slate-700 pb-1"><span>🍗 Pechuga Pollo (Cruda)</span> <span class="text-white font-bold">${Math.round(amount/0.25)}g</span></div>
                 <div class="flex justify-between border-b border-slate-700 pb-1"><span>🐟 Pescado Blanco</span> <span class="text-white font-bold">${Math.round(amount/0.18)}g</span></div>
                 <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥩 Res Magra</span> <span class="text-white font-bold">${Math.round(amount/0.23)}g</span></div>
-                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥚 Huevos Enteros</span> <span class="text-white font-bold">${Math.round(amount/0.12)} pzas</span></div>
+                <div class="flex justify-between border-b border-slate-700 pb-1"><span>🥚 Huevos Enteros</span> <span class="text-white font-bold">${Math.round(amount/6.4)} pzas</span></div>
                 <div class="flex justify-between"><span>🥛 Whey Protein</span> <span class="text-white font-bold">${Math.round(amount/0.80)}g</span></div>
                 <p class="text-[9px] text-slate-500 mt-2 text-center">💡 ¿Quieres usar Jamón o Salchicha? Pregúntale a la IA en el chat.</p>`;
             } else {
